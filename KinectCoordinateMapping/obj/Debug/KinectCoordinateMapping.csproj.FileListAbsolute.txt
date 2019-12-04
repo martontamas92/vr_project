@@ -1,0 +1,20 @@
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/bin/Debug/KinectCoordinateMapping.exe.config
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/bin/Debug/KinectCoordinateMapping.exe
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/bin/Debug/KinectCoordinateMapping.pdb
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/bin/Debug/Microsoft.Kinect.dll
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/bin/Debug/Microsoft.Kinect.xml
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.csprojAssemblyReference.cache
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/MainWindow.baml
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/MainWindow.g.cs
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/App.g.cs
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping_MarkupCompile.cache
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.g.resources
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.Properties.Resources.resources
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.csproj.GenerateResource.cache
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.csproj.CoreCompileInputs.cache
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.csproj.CopyComplete
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.exe
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.pdb
+D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping_Content.g.cs
+/home/tyukesz/Desktop/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.exe
+/home/tyukesz/Desktop/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.pdb
