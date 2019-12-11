@@ -3,7 +3,7 @@ using Microsoft.Kinect;
 
 namespace KinectCoordinateMapping.Gesture
 {
-  public class WaveGesture
+  public class WaveGesture 
   {
     readonly int WINDOW_SIZE = 50;
 
@@ -56,16 +56,21 @@ namespace KinectCoordinateMapping.Gesture
 
       System.Diagnostics.Debug.WriteLine("" + this._currentSegment + " " + this._frameCount);
 
-      foreach (var gestureSegment in this.segments)
-      {
-        Notes result = gestureSegment.Update(skeleton);
-        if (result != Notes.None)
+            /*  
+        foreach (var gestureSegment in this.segments)
         {
-          GestureRecognized(this, result);
-          return;
-        }
-      }
-      GestureRecognized(this, Notes.None);
+          Notes result = gestureSegment.Update(skeleton);
+          if (result != Notes.None)
+          {
+            GestureRecognized(this, result);
+            return;
+          }
+        } */
+            Calculate c = new Calculate();
+            c.CalculatePosition(skeleton);
+            
+      //GestureRecognized(this, Notes.None);
     }
+    
   }
 }

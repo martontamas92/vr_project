@@ -8,14 +8,83 @@
   /// </summary>
   public interface IGestureSegment
   {
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    Notes Update(Skeleton skeleton);
-  }
+        /// <summary>
+        /// Updates the current gesture.
+        /// </summary>
+        /// <param name="skeleton">The skeleton.</param>
+        /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
+        Notes Update(Skeleton skeleton);
 
+        
+    }
+
+
+    public class  Calculate 
+    {
+        public Calculate() { }
+        public void CalculatePosition(Skeleton skeleton)
+        {
+           
+
+            Console.WriteLine("\n Joints");
+            Console.WriteLine("ShoulderRight X: " + skeleton.Joints[JointType.ShoulderRight].Position.X);
+            Console.WriteLine("ShoulderRight Y: " + skeleton.Joints[JointType.ShoulderRight].Position.Y);
+            Console.WriteLine("ShoulderRight Z: " + skeleton.Joints[JointType.ShoulderRight].Position.Z);
+            
+            Console.WriteLine("ElbowRight X: " + skeleton.Joints[JointType.ElbowRight].Position.X);
+            Console.WriteLine("ElbowRight Y: " + skeleton.Joints[JointType.ElbowRight].Position.Y);
+            Console.WriteLine("ElbowRight Z: " + skeleton.Joints[JointType.ElbowRight].Position.Z);
+
+            Console.WriteLine("WristRight X: " + skeleton.Joints[JointType.WristRight].Position.X);
+            Console.WriteLine("WristRight Y: " + skeleton.Joints[JointType.WristRight].Position.Y);
+            Console.WriteLine("WristRight Z: " + skeleton.Joints[JointType.WristRight].Position.Z);
+
+            float felkar = Tangent(
+                skeleton.Joints[JointType.ShoulderRight].Position.X,
+                skeleton.Joints[JointType.ElbowRight].Position.X,
+                skeleton.Joints[JointType.ShoulderRight].Position.Y,
+                skeleton.Joints[JointType.ElbowRight].Position.Y
+                );
+            float alkar = Tangent(
+                
+                skeleton.Joints[JointType.ElbowRight].Position.X,
+                skeleton.Joints[JointType.WristRight].Position.X,
+                skeleton.Joints[JointType.ElbowRight].Position.Y,
+                skeleton.Joints[JointType.WristRight].Position.Y
+                
+                );
+            Console.WriteLine("Shoulder-Elbow Angle: " + felkar + "\n");
+            Console.WriteLine("Elbow-Wrist Angle: " + alkar + "\n");
+            CreateCode(felkar,alkar);
+            
+
+
+        }
+
+        public void CreateCode(float tg1, float tg2)
+        {
+            string code = "";
+            code += "1 " + tg1 + "\n";
+            code += "2 " + tg2 + "\n";
+            code += "3 " + "0" + "\n";
+            code += "\n";
+
+            Console.WriteLine("A kód: \n " + code);
+            
+        }
+
+        public float Tangent(float X1, float X2, float Y1, float Y2)
+        {
+            float tg = (Y2-Y1)/(X2 - X1);
+
+            //return (float)Math.Atan(tg);
+            Console.WriteLine("tg: " + tg);
+            return (float)(Math.Atan(tg) * (180 / Math.PI));
+           
+        }
+    }
+
+    
   public class WaveGesture_Also_Do : IGestureSegment
   {
 
@@ -28,8 +97,9 @@
     /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
     public Notes Update(Skeleton skeleton)
     {
-      // Hand above elbow
-      if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.Y -
+           // Console.WriteLine(skeleton);
+            // Hand above elbow
+            if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.Y -
           skeleton.Joints[JointType.ElbowRight].Position.Y) <= this.treshhold_Y &&
           Math.Abs(skeleton.Joints[JointType.ElbowRight].Position.Y -
           skeleton.Joints[JointType.WristRight].Position.Y) <= this.treshhold_Y)
@@ -53,6 +123,7 @@
               skeleton.Joints[JointType.ElbowLeft].Position.Y >=
               skeleton.Joints[JointType.WristLeft].Position.Y)
             {
+                            
               return Notes.DoL;
             }
           }

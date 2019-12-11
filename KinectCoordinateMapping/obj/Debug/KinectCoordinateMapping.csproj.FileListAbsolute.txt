@@ -18,3 +18,20 @@ D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Proba
 D:/Egyetem/Mesteri/II ev/Kovacs Lehel Virtualis valosag modellezes/Projekt/Probalkozasok/kinect-coordinate-mapping-master/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping_Content.g.cs
 /home/tyukesz/Desktop/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.exe
 /home/tyukesz/Desktop/KinectCoordinateMapping/KinectCoordinateMapping/obj/Debug/KinectCoordinateMapping.pdb
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\bin\Debug\KinectCoordinateMapping.exe.config
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\bin\Debug\KinectCoordinateMapping.exe
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\bin\Debug\KinectCoordinateMapping.pdb
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\bin\Debug\Microsoft.Kinect.dll
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\bin\Debug\Microsoft.Kinect.xml
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping.csprojAssemblyReference.cache
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\MainWindow.baml
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\MainWindow.g.cs
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\App.g.cs
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping_Content.g.cs
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping_MarkupCompile.cache
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping.g.resources
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping.Properties.Resources.resources
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping.csproj.GenerateResource.cache
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping.csproj.CopyComplete
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping.exe
+C:\Users\hunor\Documents\GitHub\vr_project\KinectCoordinateMapping\obj\Debug\KinectCoordinateMapping.pdb
