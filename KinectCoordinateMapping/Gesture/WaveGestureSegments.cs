@@ -3,29 +3,15 @@
   using System;
   using Microsoft.Kinect;
 
-  /// <summary>
-  /// Represents a single gesture segment which uses relative positioning of body parts to detect a gesture.
-  /// </summary>
-  public interface IGestureSegment
-  {
-        /// <summary>
-        /// Updates the current gesture.
-        /// </summary>
-        /// <param name="skeleton">The skeleton.</param>
-        /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-        Notes Update(Skeleton skeleton);
-
-        
-    }
-
 
     public class  Calculate 
     {
         public Calculate() { }
-        public void CalculatePosition(Skeleton skeleton)
-        {
-           
 
+
+        public void CalculatePosition(Skeleton skeleton, ref float prev_felkar, ref float prev_alkar)
+        {
+            /*
             Console.WriteLine("\n Joints");
             Console.WriteLine("ShoulderRight X: " + skeleton.Joints[JointType.ShoulderRight].Position.X);
             Console.WriteLine("ShoulderRight Y: " + skeleton.Joints[JointType.ShoulderRight].Position.Y);
@@ -38,35 +24,46 @@
             Console.WriteLine("WristRight X: " + skeleton.Joints[JointType.WristRight].Position.X);
             Console.WriteLine("WristRight Y: " + skeleton.Joints[JointType.WristRight].Position.Y);
             Console.WriteLine("WristRight Z: " + skeleton.Joints[JointType.WristRight].Position.Z);
-
+            */
             float felkar = Tangent(
                 skeleton.Joints[JointType.ShoulderRight].Position.X,
                 skeleton.Joints[JointType.ElbowRight].Position.X,
                 skeleton.Joints[JointType.ShoulderRight].Position.Y,
                 skeleton.Joints[JointType.ElbowRight].Position.Y
                 );
-            float alkar = Tangent(
-                
+            float alkar =  Tangent(
                 skeleton.Joints[JointType.ElbowRight].Position.X,
                 skeleton.Joints[JointType.WristRight].Position.X,
                 skeleton.Joints[JointType.ElbowRight].Position.Y,
                 skeleton.Joints[JointType.WristRight].Position.Y
-                
                 );
+            float csuklo = Tangent(
+                skeleton.Joints[JointType.WristRight].Position.X,
+                skeleton.Joints[JointType.HandRight].Position.X,
+                skeleton.Joints[JointType.WristRight].Position.Y,
+                skeleton.Joints[JointType.HandRight].Position.Y
+
+                );
+            int nyitva = (csuklo>30 ? 1 : 0);
+            /*
             Console.WriteLine("Shoulder-Elbow Angle: " + felkar + "\n");
             Console.WriteLine("Elbow-Wrist Angle: " + alkar + "\n");
-            CreateCode(felkar,alkar);
-            
+            Console.WriteLine("Wrist-Hand Angle: " + csuklo + "\n");*/
 
+            Console.WriteLine("prev_felkar: " + prev_felkar);
+            Console.WriteLine("prev_alkar: " + prev_alkar + "\n");
 
+            CreateCode(felkar - prev_felkar, alkar - prev_alkar, nyitva);
+            prev_felkar = felkar;
+            prev_alkar = alkar;
         }
 
-        public void CreateCode(float tg1, float tg2)
+        public void CreateCode(float felkar, float alkar, int nyitva)
         {
             string code = "";
-            code += "1 " + tg1 + "\n";
-            code += "2 " + tg2 + "\n";
-            code += "3 " + "0" + "\n";
+            code += "1 " + felkar + "\n";
+            code += "2 " + alkar + "\n";
+            code += "3 " + nyitva + "\n";
             code += "\n";
 
             Console.WriteLine("A kód: \n " + code);
@@ -84,350 +81,4 @@
         }
     }
 
-    
-  public class WaveGesture_Also_Do : IGestureSegment
-  {
-
-    private readonly double treshhold_Y = 0.055;
-    private readonly double treshhold_X = 0.08;
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-           // Console.WriteLine(skeleton);
-            // Hand above elbow
-            if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.Y -
-          skeleton.Joints[JointType.ElbowRight].Position.Y) <= this.treshhold_Y &&
-          Math.Abs(skeleton.Joints[JointType.ElbowRight].Position.Y -
-          skeleton.Joints[JointType.WristRight].Position.Y) <= this.treshhold_Y)
-      {
-        // Hand right of elbow
-        if (skeleton.Joints[JointType.ShoulderRight].Position.X <=
-          skeleton.Joints[JointType.ElbowRight].Position.X &&
-          skeleton.Joints[JointType.ElbowRight].Position.X <=
-          skeleton.Joints[JointType.WristRight].Position.X)
-        {
-
-          // Other hand
-          if (Math.Abs(skeleton.Joints[JointType.ShoulderLeft].Position.X -
-          skeleton.Joints[JointType.ElbowLeft].Position.X) <= this.treshhold_X &&
-          Math.Abs(skeleton.Joints[JointType.ElbowLeft].Position.X -
-          skeleton.Joints[JointType.WristLeft].Position.X) <= this.treshhold_X)
-          {
-            // Hand right of elbow
-            if (skeleton.Joints[JointType.ShoulderLeft].Position.Y >=
-              skeleton.Joints[JointType.ElbowLeft].Position.Y &&
-              skeleton.Joints[JointType.ElbowLeft].Position.Y >=
-              skeleton.Joints[JointType.WristLeft].Position.Y)
-            {
-                            
-              return Notes.DoL;
-            }
-          }
-        }
-      }
-      // Hand dropped
-      return Notes.None;
-    }
-  }
-
-  public class WaveGestureFa : IGestureSegment
-  {
-    private readonly double treshhold_Y = 0.055;
-    private readonly double treshhold_X = 0.08;
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-      // Hand above elbow
-      if (Math.Abs(skeleton.Joints[JointType.ShoulderLeft].Position.Y -
-          skeleton.Joints[JointType.ElbowLeft].Position.Y) <= this.treshhold_Y &&
-          Math.Abs(skeleton.Joints[JointType.ElbowLeft].Position.Y -
-          skeleton.Joints[JointType.WristLeft].Position.Y) <= this.treshhold_Y)
-      {
-        // Hand right of elbow
-        if (skeleton.Joints[JointType.ShoulderLeft].Position.X >=
-          skeleton.Joints[JointType.ElbowLeft].Position.X &&
-          skeleton.Joints[JointType.ElbowLeft].Position.X >=
-          skeleton.Joints[JointType.WristLeft].Position.X)
-        {
-
-          // Other hand
-          if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.X -
-          skeleton.Joints[JointType.ElbowRight].Position.X) <= this.treshhold_X &&
-          Math.Abs(skeleton.Joints[JointType.ElbowRight].Position.X -
-          skeleton.Joints[JointType.WristRight].Position.X) <= this.treshhold_X)
-          {
-            // Hand right of elbow
-            if (skeleton.Joints[JointType.ShoulderRight].Position.Y >=
-              skeleton.Joints[JointType.ElbowRight].Position.Y &&
-              skeleton.Joints[JointType.ElbowRight].Position.Y >=
-              skeleton.Joints[JointType.WristRight].Position.Y)
-            {
-              return Notes.Fa;
-            }
-          }
-        }
-      }
-      // Hand dropped
-      return Notes.None;
-    }
-  }
-
-  public class WaveGesture_Felso_Do : IGestureSegment
-  {
-    private readonly double treshhold_Y = 0.055;
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-      // Hand above elbow
-      // Hand above elbow
-      if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.Y -
-          skeleton.Joints[JointType.ElbowRight].Position.Y) <= this.treshhold_Y &&
-          Math.Abs(skeleton.Joints[JointType.ElbowRight].Position.Y -
-          skeleton.Joints[JointType.WristRight].Position.Y) <= this.treshhold_Y)
-      {
-        // Hand right of elbow
-        if (skeleton.Joints[JointType.ShoulderRight].Position.X <=
-          skeleton.Joints[JointType.ElbowRight].Position.X &&
-          skeleton.Joints[JointType.ElbowRight].Position.X <=
-          skeleton.Joints[JointType.WristRight].Position.X)
-        {
-          if (Math.Abs(skeleton.Joints[JointType.ShoulderLeft].Position.Y -
-              skeleton.Joints[JointType.ElbowLeft].Position.Y) <= this.treshhold_Y &&
-              Math.Abs(skeleton.Joints[JointType.ElbowLeft].Position.Y -
-              skeleton.Joints[JointType.WristLeft].Position.Y) <= this.treshhold_Y)
-          {
-            // Hand right of elbow
-            if (skeleton.Joints[JointType.ShoulderLeft].Position.X >=
-                skeleton.Joints[JointType.ElbowLeft].Position.X &&
-                skeleton.Joints[JointType.ElbowLeft].Position.X >=
-                skeleton.Joints[JointType.WristLeft].Position.X)
-            {
-              return Notes.DoF;
-            }
-          }
-        }
-      }
-
-      // Hand dropped
-      return Notes.None;
-    }
-  }
-
-  public class WaveGestureRe : IGestureSegment
-  {
-    private readonly double treshhold_Y = 0.055;
-    private readonly double treshhold_X = 0.08;
-
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-      // Hand above elbow
-      if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.Y -
-          skeleton.Joints[JointType.ElbowRight].Position.Y) <= this.treshhold_Y &&
-          skeleton.Joints[JointType.ShoulderRight].Position.Y <
-          skeleton.Joints[JointType.WristRight].Position.Y)
-      {
-        // Hand right of elbow
-        if (skeleton.Joints[JointType.ShoulderRight].Position.X <=
-          skeleton.Joints[JointType.ElbowRight].Position.X &&
-          Math.Abs(skeleton.Joints[JointType.ElbowRight].Position.X -
-          skeleton.Joints[JointType.WristRight].Position.X) < this.treshhold_X)
-        {
-          // Other hand
-          if (Math.Abs(skeleton.Joints[JointType.ShoulderLeft].Position.X -
-          skeleton.Joints[JointType.ElbowLeft].Position.X) <= this.treshhold_X &&
-          Math.Abs(skeleton.Joints[JointType.ElbowLeft].Position.X -
-          skeleton.Joints[JointType.WristLeft].Position.X) <= this.treshhold_X)
-          {
-            // Hand right of elbow
-            if (skeleton.Joints[JointType.ShoulderLeft].Position.Y >=
-              skeleton.Joints[JointType.ElbowLeft].Position.Y &&
-              skeleton.Joints[JointType.ElbowLeft].Position.Y >=
-              skeleton.Joints[JointType.WristLeft].Position.Y)
-            {
-              return Notes.Re;
-            }
-          }
-        }
-      }
-
-      // Hand dropped
-      return Notes.None;
-    }
-  }
-
-  public class WaveGestureMi : IGestureSegment
-  {
-    private readonly double treshhold_Y = 0.055;
-    private readonly double treshhold_X = 0.08;
-
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-      // Hand above elbow
-      if (Math.Abs(skeleton.Joints[JointType.ShoulderLeft].Position.Y -
-          skeleton.Joints[JointType.ElbowLeft].Position.Y) <= this.treshhold_Y &&
-          skeleton.Joints[JointType.ShoulderLeft].Position.Y <
-          skeleton.Joints[JointType.WristLeft].Position.Y)
-      {
-        // Hand right of elbow
-        if (skeleton.Joints[JointType.ShoulderLeft].Position.X >=
-          skeleton.Joints[JointType.ElbowLeft].Position.X &&
-          Math.Abs(skeleton.Joints[JointType.ElbowLeft].Position.X -
-          skeleton.Joints[JointType.WristLeft].Position.X) < this.treshhold_X)
-        {
-          // Other hand
-          if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.X -
-          skeleton.Joints[JointType.ElbowRight].Position.X) <= this.treshhold_X &&
-          Math.Abs(skeleton.Joints[JointType.ElbowRight].Position.X -
-          skeleton.Joints[JointType.WristRight].Position.X) <= this.treshhold_X)
-          {
-            // Hand right of elbow
-            if (skeleton.Joints[JointType.ShoulderRight].Position.Y >=
-              skeleton.Joints[JointType.ElbowRight].Position.Y &&
-              skeleton.Joints[JointType.ElbowRight].Position.Y >=
-              skeleton.Joints[JointType.WristRight].Position.Y)
-            {
-              return Notes.Mi;
-            }
-          }
-        }
-      }
-
-      // Hand dropped
-      return Notes.None;
-    }
-  }
-
-  public class WaveGestureLa : IGestureSegment
-  {
-    private readonly double treshhold_X = 0.08;
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-      // Hand above elbow
-      if (skeleton.Joints[JointType.ShoulderRight].Position.Y <
-          skeleton.Joints[JointType.ElbowRight].Position.Y &&
-          skeleton.Joints[JointType.ElbowRight].Position.Y <
-          skeleton.Joints[JointType.WristRight].Position.Y &&
-          skeleton.Joints[JointType.Head].Position.Y <
-          skeleton.Joints[JointType.ElbowRight].Position.Y)
-      {
-
-        // Other hand
-        if (Math.Abs(skeleton.Joints[JointType.ShoulderLeft].Position.X -
-        skeleton.Joints[JointType.ElbowLeft].Position.X) <= this.treshhold_X &&
-        Math.Abs(skeleton.Joints[JointType.ElbowLeft].Position.X -
-        skeleton.Joints[JointType.WristLeft].Position.X) <= this.treshhold_X)
-        {
-          // Hand right of elbow
-          if (skeleton.Joints[JointType.ShoulderLeft].Position.Y >=
-            skeleton.Joints[JointType.ElbowLeft].Position.Y &&
-            skeleton.Joints[JointType.ElbowLeft].Position.Y >=
-            skeleton.Joints[JointType.WristLeft].Position.Y)
-          {
-            return Notes.La;
-          }
-        }
-      }
-
-      // Hand dropped
-      return Notes.None;
-    }
-  }
-
-  public class WaveGestureTi : IGestureSegment
-  {
-    private readonly double treshhold_X = 0.08;
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-      // Hand above elbow
-      if (skeleton.Joints[JointType.ShoulderLeft].Position.Y <
-          skeleton.Joints[JointType.ElbowLeft].Position.Y &&
-          skeleton.Joints[JointType.ElbowLeft].Position.Y <
-          skeleton.Joints[JointType.WristLeft].Position.Y &&
-          skeleton.Joints[JointType.Head].Position.Y <
-          skeleton.Joints[JointType.ElbowLeft].Position.Y)
-      {
-        // Other hand
-        if (Math.Abs(skeleton.Joints[JointType.ShoulderRight].Position.X -
-        skeleton.Joints[JointType.ElbowRight].Position.X) <= this.treshhold_X &&
-        Math.Abs(skeleton.Joints[JointType.ElbowRight].Position.X -
-        skeleton.Joints[JointType.WristRight].Position.X) <= this.treshhold_X)
-        {
-          // Hand right of elbow
-          if (skeleton.Joints[JointType.ShoulderRight].Position.Y >=
-            skeleton.Joints[JointType.ElbowRight].Position.Y &&
-            skeleton.Joints[JointType.ElbowRight].Position.Y >=
-            skeleton.Joints[JointType.WristRight].Position.Y)
-          {
-            return Notes.Ti;
-          }
-        }
-      }
-
-      // Hand dropped
-      return Notes.None;
-    }
-  }
-
-  public class WaveGestureSzo : IGestureSegment
-  {
-    /// <summary>
-    /// Updates the current gesture.
-    /// </summary>
-    /// <param name="skeleton">The skeleton.</param>
-    /// <returns>A GesturePartResult based on whether the gesture part has been completed.</returns>
-    public Notes Update(Skeleton skeleton)
-    {
-      // Hand above elbow
-      if (skeleton.Joints[JointType.ShoulderLeft].Position.Y <
-          skeleton.Joints[JointType.ElbowLeft].Position.Y &&
-          skeleton.Joints[JointType.ElbowLeft].Position.Y <
-          skeleton.Joints[JointType.WristLeft].Position.Y &&
-          skeleton.Joints[JointType.Head].Position.Y <
-          skeleton.Joints[JointType.ElbowLeft].Position.Y &&
-          skeleton.Joints[JointType.ShoulderRight].Position.Y <
-          skeleton.Joints[JointType.ElbowRight].Position.Y &&
-          skeleton.Joints[JointType.ElbowRight].Position.Y <
-          skeleton.Joints[JointType.WristRight].Position.Y &&
-          skeleton.Joints[JointType.Head].Position.Y <
-          skeleton.Joints[JointType.ElbowRight].Position.Y)
-      {
-        return Notes.So;
-      }
-
-      // Hand dropped
-      return Notes.None;
-    }
-  }
 }
